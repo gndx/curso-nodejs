@@ -34,7 +34,7 @@ async function transcribeAudio(audioFilePath, apiKey) {
     const transcription = data.text;
 
     const outputFilePath = path.join(
-      path.dirname(audioFile),
+      path.dirname(audioFilePath),
       `${path.basename(
         audioFilePath,
         path.extname(audioFilePath)
@@ -49,3 +49,16 @@ async function transcribeAudio(audioFilePath, apiKey) {
     throw error;
   }
 }
+
+const audioPath = './audio.mp3';
+const openaiApiKey =
+  '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';
+
+transcribeAudio(audioPath, openaiApiKey)
+  .then(transcription => {
+    console.log('Transcripción completada con exito');
+    console.log(transcription);
+  })
+  .catch(error => {
+    console.error('Fallo la transcripción', error);
+  });
